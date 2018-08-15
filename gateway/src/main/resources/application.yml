@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: sales-api
+server:
+  port: 9018
+
+zuul:
+  routes:
+    leads-api:
+      path: /leads1/**
+      serviceId: leads
+    sales-mng-web:
+      path: /sales/mp/**
+      url: http://60.12.185.130:9011/appfile/
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8881/eureka/
