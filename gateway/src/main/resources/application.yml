@@ -10,9 +10,29 @@ zuul:
       path: /leads1/**
       serviceId: leads
     sales-mng-web:
-      path: /sales/mp/**
-      url: http://60.12.185.130:9011/appfile/
+      sensitiveHeaders:
+      path: /hozon/**
+      url: http://10.111.16.174:8080/hozon
+    appservice:
+      sensitiveHeaders:
+      path: /appservice/**
+      url: http://192.168.1.106:8083/
+  ignored-services: '*'
+  host:
+    max-per-route-connections: 100
+    max-total-connections: 300
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 60000
+  ribbon:
+    ConnectTimeout: 60000
+    ReadTimeout: 60000
+    SocketTimeout: 60000
+
+  hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+
+
+
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8881/eureka/
+      defaultZone: http://localhost:9020/eureka/
