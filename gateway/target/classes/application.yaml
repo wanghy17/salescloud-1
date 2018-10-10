@@ -1,18 +1,36 @@
 spring:
   application:
-    name: sales-api
+    name: gateway
 server:
-  port: 2006
+  port: 9018
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9020/eureka #替换
 
 zuul:
   routes:
-    leads-api:
-      path: /leads1/**
-      serviceId: leads
-    sales-mng-web:
-      path: /sales/mp/**
-      url: http://60.12.185.130:9011/appfile/
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8881/eureka/
+    leads:
+      path: /leads/**
+      url: http://localhost:8080/hozon #替换
+      #保留请求header信息
+      sensitive-headers:
+      custom-sensitive-headers: true
+    hozon:
+      path: /hozon/**
+      url: http://localhost:8080/hozon #替换
+      #保留请求header信息
+      sensitive-headers:
+      custom-sensitive-headers: true
+  host:
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 10000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
