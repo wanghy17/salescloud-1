@@ -2,7 +2,7 @@ spring:
   application:
     name: sales-api
 server:
-  port: 8080
+  port: 80
 
 zuul:
   routes:
@@ -14,11 +14,15 @@ zuul:
       sensitiveHeaders:
       path: /hozon/**
      # url: http://10.111.16.174:8080/hozon
-      url:  http://10.0.6.96:8081/hozon
+      url:  http://10.253.3.216:8080/hozon
     appservice:
       sensitiveHeaders:
       path: /appservice/**
-      url:  http://10.0.6.96:8090
+      url:  http://10.253.3.216:8083
+    eureka:
+      sensitiveHeaders:
+      path: /eureka/**
+      url:  http://10.253.3.216:9020
   ignored-services: '*'
   host:
     max-per-route-connections: 100
@@ -37,4 +41,4 @@ zuul:
 eureka:
   client:
     service-url:
-      defaultZone: http://10.0.6.96:9020/eureka/
+      defaultZone: http://10.253.3.216:9020/eureka/
