@@ -2,21 +2,23 @@ spring:
   application:
     name: sales-api
 server:
-  port: 9018
+  port: 8080
 
 zuul:
   routes:
-    leads-api:
-      path: /leads1/**
-      serviceId: leads
+#    leads-api:
+#      path: /leads1/**
+#      url:  http://10.0.6.96:8081/hozon
+#      serviceId: leads
     sales-mng-web:
       sensitiveHeaders:
       path: /hozon/**
-      url: http://10.111.16.174:8080/hozon
+     # url: http://10.111.16.174:8080/hozon
+      url:  http://10.0.6.96:8081/hozon
     appservice:
       sensitiveHeaders:
       path: /appservice/**
-      url: http://192.168.1.106:8083/
+      url:  http://10.0.6.96:8090
   ignored-services: '*'
   host:
     max-per-route-connections: 100
@@ -35,4 +37,4 @@ zuul:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:9020/eureka/
+      defaultZone: http://10.0.6.96:9020/eureka/
